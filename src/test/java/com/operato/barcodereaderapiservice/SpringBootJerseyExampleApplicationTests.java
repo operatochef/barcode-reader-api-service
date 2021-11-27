@@ -52,17 +52,6 @@ class SpringBootJerseyExampleApplicationTests {
 		barcodeReader.setTexts(testList);
 		barcodeReader.setBoundaries(listCoordSet);
 
-		// String barcodeReaderJson = new Gson().toJson(barcodeReader);
-
-		// JSONParser parser = new JSONParser();
-
-		// Object barcodeReaderObj = null;
-		// try {
-		// barcodeReaderObj = parser.parse(barcodeReaderJson);
-		// } catch (ParseException ex) {
-		// System.err.println("parsing error: " + ex.getMessage());
-		// }
-
 		String barcodeReaderJson = new Gson().toJson(barcodeReader);
 
 		JSONParser parser = new JSONParser();
