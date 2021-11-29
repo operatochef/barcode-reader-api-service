@@ -1,11 +1,17 @@
 package com.operato.barcodereaderapiservice;
 
+import com.operato.barcodereaderapiservice.data.BarcodeReaderRequestBody;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,40 +29,23 @@ class SpringBootJerseyExampleApplicationTests {
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
-	// @Test
-	// void testWhenPostThenReturnSuccess() {
-	// BarcodeReaderData barcodeReader = new BarcodeReaderData();
-	// List<String> testList = new ArrayList<String>();
-	// testList.add("test1");
-	// testList.add("test2");
+	@Test
+	void testWhenPostThenReturnSuccess() {
+		BarcodeReaderRequestBody reqBody = new BarcodeReaderRequestBody();
 
-	// BarcodeReaderCoordSet coordSet = new BarcodeReaderCoordSet(new
-	// BarcodeReaderCoord(0, 0),
-	// new BarcodeReaderCoord(0, 10), new BarcodeReaderCoord(10, 0), new
-	// BarcodeReaderCoord(10, 10));
+		String base64Image = "";
+		try {
+			base64Image = new String(Files.readAllBytes(Paths.get("./assets/images/encoded-20211129065430.txt")));
+		} catch (IOException ex) {
+			throw new Error("IOException");
+		}
 
-	// List<BarcodeReaderCoordSet> listCoordSet = new
-	// ArrayList<BarcodeReaderCoordSet>();
-	// listCoordSet.add(coordSet);
+		reqBody.setImageType("jpeg");
+		reqBody.setImageData(base64Image);
 
-	// barcodeReader.setTexts(testList);
-	// barcodeReader.setBoundaries(listCoordSet);
-
-	// String barcodeReaderJson = new Gson().toJson(barcodeReader);
-
-	// JSONParser parser = new JSONParser();
-	// JSONObject resultObject = new JSONObject();
-	// try {
-	// Object barcodeReaderObj = parser.parse(barcodeReaderJson);
-	// resultObject = (JSONObject) barcodeReaderObj;
-	// } catch (ParseException ex) {
-
-	// }
-
-	// ResponseEntity<JSONObject> entity =
-	// this.restTemplate.postForEntity(BASE_API_URL, resultObject,
-	// JSONObject.class);
-	// assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-	// }
+		ResponseEntity<BarcodeReaderRequestBody> entity = this.restTemplate.postForEntity(BASE_API_URL, reqBody,
+				BarcodeReaderRequestBody.class);
+		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
+	}
 
 }
