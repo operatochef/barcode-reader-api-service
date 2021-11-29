@@ -6,13 +6,8 @@ import com.operato.barcodereader.BarcodeReaderData;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
-import java.util.ArrayList;
-
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 @Service
 public class BarcodeReaderService {
