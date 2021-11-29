@@ -21,7 +21,7 @@ public class BarcodeReaderService {
 
     public JSONObject getData(BarcodeReaderRequestBody requestBody) {
 
-        String imageType = requestBody.getImageData();
+        // String imageType = requestBody.getImageData();
         String imageData = requestBody.getImageData();
 
         try {
