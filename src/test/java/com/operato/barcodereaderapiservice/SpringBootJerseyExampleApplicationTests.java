@@ -40,8 +40,9 @@ class SpringBootJerseyExampleApplicationTests {
 			throw new Error("IOException");
 		}
 
-		reqBody.setImageType("jpeg");
-		reqBody.setImageData(base64Image);
+		reqBody.setName("testImage1");
+		reqBody.setFormat("jpeg");
+		reqBody.setData(base64Image);
 
 		ResponseEntity<BarcodeReaderRequestBody> entity = this.restTemplate.postForEntity(BASE_API_URL, reqBody,
 				BarcodeReaderRequestBody.class);

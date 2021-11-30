@@ -1,30 +1,40 @@
 package com.operato.barcodereaderapiservice.data;
 
 public class BarcodeReaderRequestBody {
-  private String imageType;
-  private String imageData;
+  private String format;
+  private String data;
+  private String name;
 
-  public BarcodeReaderRequestBody(String imageType, String imageData) {
-    this.imageType = imageType;
-    this.imageData = imageData;
+  public BarcodeReaderRequestBody(String format, String data, String name) {
+    this.format = format;
+    this.data = data;
+    this.name = name;
   }
 
   public BarcodeReaderRequestBody() {
   }
 
-  public void setImageType(String imageType) {
-    this.imageType = imageType;
+  public void setFormat(String format) {
+    this.format = format;
   }
 
-  public void setImageData(String imageData) {
-    this.imageData = imageData;
+  public void setData(String data) {
+    this.data = data;
   }
 
-  public String getImageType() {
-    return this.imageType;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public String getImageData() {
-    return this.imageData;
+  public String getFormat() {
+    return this.format;
+  }
+
+  public String getData() {
+    return this.data;
+  }
+
+  public String getName() {
+    return this.name;
   }
 }
