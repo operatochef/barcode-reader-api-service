@@ -2,6 +2,8 @@ package com.operato.barcodereaderapiservice.resources;
 
 import com.operato.barcodereaderapiservice.data.BarcodeReaderRequestBody;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,7 +33,7 @@ public class BarcodeReaderResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response postBarcodeReaderResult(@RequestBody BarcodeReaderRequestBody requestBody) {
+    public Response postBarcodeReaderResult(@RequestBody List<BarcodeReaderRequestBody> requestBody) {
         return Response.ok(barcodeReaderService.getData(requestBody)).build();
     }
 }

@@ -13,6 +13,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -44,8 +47,11 @@ class SpringBootJerseyExampleApplicationTests {
 		reqBody.setFormat("jpeg");
 		reqBody.setData(base64Image);
 
-		ResponseEntity<BarcodeReaderRequestBody> entity = this.restTemplate.postForEntity(BASE_API_URL, reqBody,
-				BarcodeReaderRequestBody.class);
+		List<BarcodeReaderRequestBody> reqBodyList = new ArrayList<BarcodeReaderRequestBody>();
+		reqBodyList.add(reqBody);
+
+		ResponseEntity<BarcodeReaderRequestBody[]> entity = this.restTemplate.postForEntity(BASE_API_URL, reqBodyList,
+				BarcodeReaderRequestBody[].class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 

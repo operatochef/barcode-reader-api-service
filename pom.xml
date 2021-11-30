@@ -75,9 +75,9 @@
 		<dependency>
 			<groupId>com.operato</groupId>
 			<artifactId>barcode-reader</artifactId>
-			<version>0.9.3</version>
+			<version>0.9.4</version>
 			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/barcode-reader-0.9.3.jar</systemPath>
+			<systemPath>${project.basedir}/lib/barcode-reader-0.9.4.jar</systemPath>
 		</dependency>
 		<dependency>
 			<groupId>com.google.zxing</groupId>
