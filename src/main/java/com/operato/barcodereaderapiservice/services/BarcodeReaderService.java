@@ -4,8 +4,6 @@ import com.operato.barcodereaderapiservice.data.BarcodeReaderRequestBody;
 import com.operato.barcodereader.BarcodeReader;
 import com.operato.barcodereader.BarcodeReaderData;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import org.springframework.stereotype.Service;
 
