@@ -1,6 +1,6 @@
 package com.operato.barcodereaderapiservice.services;
 
-import com.operato.barcodereaderapiservice.data.BarcodeReaderRequestBody;
+import com.operato.barcodereaderapiservice.data.*;
 import com.operato.barcodereader.BarcodeReader;
 import com.operato.barcodereader.BarcodeReaderData;
 import com.google.gson.Gson;
@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -20,28 +19,31 @@ public class BarcodeReaderService {
   // private TaskMapper taskMapper;
 
   public String getResult() {
-    return "Ok";
+    return "Please use POST with the json-fomatted body.";
   }
 
-  public List<JSONObject> getData(List<BarcodeReaderRequestBody> requestBodies) {
+  public JSONObject getData(List<BarcodeReaderRequestBody> requestBodies) {
+    try {
+      BarcodeReaderResponseBody responseBody = new BarcodeReaderResponseBody();
+      for (BarcodeReaderRequestBody requestBody : requestBodies) {
+        String imageData = requestBody.getData();
 
-    List<JSONObject> barcodeResultJsonList = new ArrayList<JSONObject>();
-
-    for (BarcodeReaderRequestBody requestBody : requestBodies) {
-      String imageData = requestBody.getData();
-
-      try {
         BarcodeReaderData barcodeData = BarcodeReader.decodeBase64(imageData);
-
-        String barcodeReaderJson = new Gson().toJson(barcodeData);
-        JSONParser parser = new JSONParser();
-        JSONObject barcodeReaderObj = (JSONObject) parser.parse(barcodeReaderJson);
-        barcodeResultJsonList.add(barcodeReaderObj);
-      } catch (Exception e) {
-        System.err.println("Cannot find any barcode: " + e.getMessage());
+        responseBody.addResult(barcodeData);
+        if (barcodeData.getStatusCode() == "200") {
+          responseBody.incSuccessCount();
+        } else {
+          responseBody.incFailureCount();
+        }
       }
-    }
 
-    return barcodeResultJsonList;
+      String barcodeReaderJson = new Gson().toJson(responseBody);
+      JSONParser parser = new JSONParser();
+      JSONObject barcodeReaderObj = (JSONObject) parser.parse(barcodeReaderJson);
+      return barcodeReaderObj;
+    } catch (Exception e) {
+      System.err.println("Cannot find any barcode: " + e.getMessage());
+      return null;
+    }
   }
 }

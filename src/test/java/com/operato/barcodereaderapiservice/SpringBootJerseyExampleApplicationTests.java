@@ -1,6 +1,7 @@
 package com.operato.barcodereaderapiservice;
 
 import com.operato.barcodereaderapiservice.data.BarcodeReaderRequestBody;
+import com.operato.barcodereaderapiservice.data.BarcodeReaderResponseBody;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,8 @@ class SpringBootJerseyExampleApplicationTests {
 		List<BarcodeReaderRequestBody> reqBodyList = new ArrayList<BarcodeReaderRequestBody>();
 		reqBodyList.add(reqBody);
 
-		ResponseEntity<BarcodeReaderRequestBody[]> entity = this.restTemplate.postForEntity(BASE_API_URL, reqBodyList,
-				BarcodeReaderRequestBody[].class);
+		ResponseEntity<BarcodeReaderResponseBody> entity = this.restTemplate.postForEntity(BASE_API_URL, reqBodyList,
+				BarcodeReaderResponseBody.class);
 		assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 	}
 
