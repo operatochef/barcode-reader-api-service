@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.operato.barcodereaderapiservice.services.BarcodeReaderService;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,5 +41,17 @@ public class BarcodeReaderResource {
     } catch (Exception e) {
       return Response.status(400).entity(e.getMessage()).build();
     }
+  }
+
+  @POST
+  @Path("/test")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response postTestResult(@RequestBody Object requestBody) {
+
+    System.out.println("Request Body: ");
+    System.out.println(requestBody.toString());
+
+    return Response.ok("Hi~").build();
   }
 }
