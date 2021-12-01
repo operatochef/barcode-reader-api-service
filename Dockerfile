@@ -1,4 +1,4 @@
-# Use an aidoop nodejs base image
+
 FROM maven:3.8.3-openjdk-11
 LABEL org.opencontainers.image.created='2021-11-29'       
 LABEL org.opencontainers.image.authors='jinwon@ai-doop.com'
