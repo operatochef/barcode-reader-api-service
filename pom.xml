@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.operato</groupId>
 	<artifactId>barcode-reader-api-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.9.5</version>
 	<name>barcode-reader-api-service</name>
 	<description>multiple barcode reader api service for MSA</description>
 	<properties>
