@@ -25,9 +25,6 @@ public class BarcodeReaderService {
 
   public List<JSONObject> getData(List<BarcodeReaderRequestBody> requestBodies) {
 
-    // String name = requestBody.getName();
-    // String format = requestBody.getFormat();
-
     List<JSONObject> barcodeResultJsonList = new ArrayList<JSONObject>();
 
     for (BarcodeReaderRequestBody requestBody : requestBodies) {

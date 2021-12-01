@@ -21,19 +21,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Path("/")
 public class BarcodeReaderResource {
 
-    @Autowired
-    private BarcodeReaderService barcodeReaderService;
+  @Autowired
+  private BarcodeReaderService barcodeReaderService;
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getBarcodeReaderResult() {
-        return Response.ok(barcodeReaderService.getResult()).build();
-    }
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getBarcodeReaderResult() {
+    return Response.ok(barcodeReaderService.getResult()).build();
+  }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response postBarcodeReaderResult(@RequestBody List<BarcodeReaderRequestBody> requestBody) {
-        return Response.ok(barcodeReaderService.getData(requestBody)).build();
+  @POST
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response postBarcodeReaderResult(@RequestBody List<BarcodeReaderRequestBody> requestBody) {
+    try {
+      return Response.ok(barcodeReaderService.getData(requestBody)).build();
+    } catch (Exception e) {
+      return Response.status(400).entity(e.getMessage()).build();
     }
+  }
 }
