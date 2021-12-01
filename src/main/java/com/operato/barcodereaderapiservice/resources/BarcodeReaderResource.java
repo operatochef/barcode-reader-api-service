@@ -14,7 +14,6 @@ import javax.ws.rs.core.Response;
 
 import com.operato.barcodereaderapiservice.services.BarcodeReaderService;
 
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
