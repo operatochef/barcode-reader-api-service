@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: barcode-reader-api-service
+  name: barcode-reader-api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: barcode-reader-api-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: barcode-reader-api-service
+    spec:
+      containers:
+        - image: hatiolab/barcode-reader-api-service:0.9.6
+          imagePullPolicy: Always
+          name: barcode-reader-api-service
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 500m
+              memory: 256Mi
+          securityContext:
+            privileged: false
+      restartPolicy: Always
+      serviceAccountName: ""
+status: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: barcode-reader-api-service
+  name: barcode-reader-api-service
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 8080
+  selector:
+    app: barcode-reader-api-service
+status:
+  loadBalancer: {}
